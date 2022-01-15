@@ -1,2 +1,2 @@
 # plann
-Fast and simply tasktracker on PHP and boostrap grid based on Eisenhower matrix
+Fast and simply tasktracker on PHP and bootstrap grid based on Eisenhower matrix
