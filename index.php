@@ -331,7 +331,7 @@
                     position: 'top',
                   },
                   title: {
-                    display: false,
+                    display: true,
                     text: 'Статистика по задачам'
                   }
                 }
