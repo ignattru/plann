@@ -92,17 +92,17 @@
                 </form>
             </div>
         </nav>
-        <div class="container-fluid" style="background-color: #7556f3;height: 411px;padding-top: 80px;">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
+        <div class="container-fluid" style="background-color: #7556f3; height: 26em;  padding-top: 80px;">
+            <div class="card mb-3" style="max-width: 540px; border: none;">
+                <div class="row no-gutters" style="background-color: #7556f3;clip-path: none;">
                     <div class="col-md-4">
-                        <img src="..." class="card-img" alt="...">
+                        <img src="img/abcd_small_w.png" class="card-img" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Тайтл</h5>
-                            <p class="card-text">Просто обычный адаптивный абзац, текст и гифка, всякое разное вот тут.</p>
-                            <p class="card-text"><small class="text-muted">Подтекст</small></p>
+                            <h5 class="card-title">Планн</h5>
+                            <p class="card-text">Планн - простой и быстрый трекер задач. Просто обычный адаптивный абзац, текст и гифка, всякое разное вот тут.</p>
+                            <p class="card-text"><small>Документация</small></p>
                         </div>
                     </div>
                 </div>
@@ -317,8 +317,8 @@
                     labels: ['Срочных и важных', 'Срочных не важных', 'Важных не срочных', 'Не важных не срочных'],
                     datasets: [{
                         label: 'Dataset',
-                        backgroundColor: ["rgb(66, 103, 252)","rgb(71, 224, 63)", "rgb(71, 124, 63)",  "rgb(71, 34, 22)"],
-                        borderColor: 'rgb(255, 255, 255)',
+                        backgroundColor: ["rgb(211, 222, 220)","rgb(146, 169, 189)", "rgb(124, 153, 172)",  "rgb(255, 239, 239)"],
+                        borderColor: 'rgb(249, 249, 249)',
                         data: [cntA, cntB, cntC, cntD],
                     }]
                 },
