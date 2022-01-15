@@ -1,8 +1,6 @@
-<?php include __DIR__.'/config.php'; ?>
 <html>
     <head>
         <title>Новая задача</title>
-
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -12,25 +10,20 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
-<?php if(AUTH) { //Если мы авторизированы ?> 
+
 <body>
     
 <?php
-
-#Скрипт с настройками соединения с базой
+    include __DIR__.'/config.php'; 
     require_once 'connection.php'; 
-#Скрипты для отправки почты
-    require 'phpmailer/PHPMailer.php';
-    require 'phpmailer/SMTP.php';
-    require 'phpmailer/Exception.php';
 
     if(isset($_POST['title']) && isset($_POST['body']) && isset($_POST['dcreate']) && isset($_POST['dplan']) && isset($_POST['important']) && isset($_POST['maker']) ){
-    // подключаемся к серверу
+    // Connect to server
         $link = mysqli_connect($host, $user, $password, $database) 
         or die("Ошибка " . mysqli_error($link)); 
 	    $link->set_charset("utf8");
      
-    // экранированиt символов для mysql
+    // Hide symb
         $title = htmlentities(mysqli_real_escape_string($link, $_POST['title']));
         $body = $_POST['body'];
         $dcreate = htmlentities(mysqli_real_escape_string($link, $_POST['dcreate']));
@@ -38,13 +31,12 @@
         $important = htmlentities(mysqli_real_escape_string($link, $_POST['important'])); 
         $maker = htmlentities(mysqli_real_escape_string($link, $_POST['maker'])); 
      
-    // создание строки запроса
+    // Set a query
         $query ="INSERT INTO TASK_LIST VALUES(NULL, '$title','$body', '$dcreate', '$dplan', NULL, NULL, '$important', '$maker', '5' )";
         $queryId ="SELECT MAX(OUID) FROM TASK_LIST"; 
   
-    // выполняем запрос
+    // Run query
     $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
-
     $result_id = mysqli_query($link, $queryId) or die("Ошибка " . mysqli_error($link)); 
     while ($row = mysqli_fetch_row($result_id)) {
         $id = $row[0];
@@ -57,62 +49,6 @@
     if($result)
     {
         echo "<div class='alert alert-success' role='alert'>Задача успешно создана</div>";
-        
-    // Сделаем табличку адресов почты для отправки:
-        if ($maker == 1) { $addr = "a.v.sauckiv.ru"; }
-        elseif ($maker == 2) { $addr = "i.b.hv.ru"; }
-        elseif ($maker == 3) { $addr = "r.g.du.khv.ru";}
-        elseif ($maker == 4) { $addr = "e.m.levshv.ru";}
-        elseif ($maker == 5) { $addr = "i.v.levitdm.khv.ru";}
-        elseif ($maker == 6) { $addr = "e.v.geram.khv.ru";}
-        elseif ($maker == 7) { $addr = "evigndm.khv.ru";}
-        elseif ($maker == 8) { echo "<div class='alert alert-danger' role='alert'>У бэтмена нет почты!</div>";}
-
-    // Отправка на почту
-       
-        $mail = new PHPMailer\PHPMailer\PHPMailer();
-            try {
-        $msg = "<div class='alert alert-success' role='alert'>Письмо направлено на адрес: $addr</div>";
-        $mail->isSMTP();   
-        $mail->CharSet = "UTF-8";                                          
-        $mail->SMTPAuth   = true;
-    // Настройки вашей почты
-        $mail->Host       = 'smtp.yandex.ru'; // SMTP сервер
-        $mail->Username   = 'pup.vasan'; // Логин на почте
-        $mail->Password   = 'Revenge34'; // Пароль на почте
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port       = 465;
-        $mail->setFrom('pup.vasan@yandex.ru', 'Трекер Задач'); // Адрес самой почты и имя отправителя, ответ будет на эту почту
-    // Получатель письма
-        $mail->addAddress($addr);  
-
-        // ----------------------- 
-        // Само письмо
-        // -----------------------
-        $mail->isHTML(true);
-    
-        $mail->Subject = 'В трекере создана новая задача';
-        $mail->Body    = "
-        <small>Таск Менеджер / задача №$id</small>
-        <h1 style='margin-top: 1px;'><a href='https://tm.mszn27.ru/task.php?id=$id'>$title</a></h1>
-        <b>Создан:</b> $dcreate <br>
-        <b>Срок исполнения:</b> $dplan <br>
-        <b>Приоритет:</b> $isimp
-        <hr>
-        <p>$body</p>
-        
-        <p>*Вы получили это письмо так как являетесь исполнителем задачи</p>
-        ";
-
-// gроверяем отравленность сообщения
-if ($mail->send()) {
-    echo "$msg";
-} else {
-echo "Сообщение не было отправлено. Неверно указаны настройки вашей почты";
-}
-} catch (Exception $e) {
-    echo "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo}";
-}
 
 
     }
@@ -181,15 +117,17 @@ echo "Сообщение не было отправлено. Неверно ук
             <div class="form-group col-md-6">
                 <label for="inputState">Важно?</label>
                 <select id="inputState" class="form-control" name="important">
-                    <option value = "1" selected>Да</option>
-                    <option value = "2">Нет</option>
+                    <option value = "1" selected>Срочно и важно</option>
+                    <option value = "2">Срочно и не важно</option>
+                    <option value = "3">Не срочно но важно</option>
+                    <option value = "4">Не срочно и не важно</option>
                 </select>
             </div>
         </div>    
     
         <div class="form-row">
             <div class="form-group col-md-6">
-                <button type="submit" class="btn btn-warning">Сохранить</button>
+                <button type="submit" class="btn btn-warning">Создать</button>
             </div>
         </div>
     </form>
@@ -230,92 +168,6 @@ echo "Сообщение не было отправлено. Неверно ук
 mysqli_free_result($result);
 mysqli_close($link);
 ?>
-<?php } else { //Если мы не авторизированы  ?>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
-<style>
-.form-width {max-width: 25rem;}
-.has-float-label {
- position: relative; }
- .has-float-label label {
- position: absolute;
- left: 0;
- top: 0;
- cursor: text;
- font-size: 75%;
- opacity: 1;
- -webkit-transition: all .2s;
- transition: all .2s;
- top: -.5em;
- left: 0.75rem;
- z-index: 3;
- line-height: 1;
- padding: 0 1px; }
- .has-float-label label::after {
- content: " ";
- display: block;
- position: absolute;
- background: white;
- height: 2px;
- top: 50%;
- left: -.2em;
- right: -.2em;
- z-index: -1; }
- .has-float-label .form-control::-webkit-input-placeholder {
- opacity: 1;
- -webkit-transition: all .2s;
- transition: all .2s; }
- .has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
- opacity: 0; }
- .has-float-label .form-control:placeholder-shown:not(:focus) + label {
- font-size: 150%;
- opacity: .5;
- top: .3em; }
-
-.input-group .has-float-label {
- display: table-cell; }
- .input-group .has-float-label .form-control {
- border-radius: 0.25rem; }
- .input-group .has-float-label:not(:last-child) .form-control {
- border-bottom-right-radius: 0;
- border-top-right-radius: 0; }
- .input-group .has-float-label:not(:first-child) .form-control {
- border-bottom-left-radius: 0;
- border-top-left-radius: 0;
- margin-left: -1px; }
- body {
-    background: linear-gradient(to bottom, #ff9900 0%, #ffcc00 100%);
- }
-</style>
-
-<div class="p-x-1 p-y-3">
-    <form class="card card-block m-x-auto bg-faded form-width" action="login.php" method="post">
-    <legend class="m-b-1 text-xs-center">Войти</legend>
-    <div class="form-group input-group">
-    <span class="has-float-label">
-    <input class="form-control" id="first" type="text" name="login" placeholder="Логин"/>
-    <label for="first">Логин</label>
-    </span>
-    </div>
-    <div class="form-group has-float-label">
-    <input class="form-control" id="password" type="password" name="password" placeholder="••••••••"/>
-    <label for="password">Пароль</label>
-    </div>
-    <div class="form-group">
-     <label class="custom-control custom-checkbox">
-    <input class="custom-control-input" type="checkbox" name="remember"/>
-    <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">Запомнить меня</span>
-    </label>
-    <?php if(!empty($message)) { ?>
-    <p><?php echo $message; ?></p>
-    <?php } ?>
-    </div>
-    <div class="text-xs-center">
-    <button class="btn btn-block btn-warning" type="submit">Вход</button>
-    </div>
-    </form>
-</div>
-<?php } ?>
 </body>
 </html>
