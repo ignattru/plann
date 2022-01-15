@@ -206,3 +206,7 @@ p {
 	text-transform: none;
 }
  
+.card-body, small, .card-title, h5, .card-text, p{
+  color: #fff;
+}
+
