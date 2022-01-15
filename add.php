@@ -34,17 +34,17 @@
             $queryId ="SELECT MAX(OUID) FROM TASK_LIST"; 
       
         // Run query
-        $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
-        $result_id = mysqli_query($link, $queryId) or die("Ошибка " . mysqli_error($link)); 
-        while ($row = mysqli_fetch_row($result_id)) {
-            $id = $row[0];
-        }
+            $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+            $result_id = mysqli_query($link, $queryId) or die("Ошибка " . mysqli_error($link)); 
+            while ($row = mysqli_fetch_row($result_id)) {
+                $id = $row[0];
+            }
 
-        if($result) {
-            echo "<div class='alert alert-success' role='alert'>Задача успешно создана</div>";
-        }
-        // закрываем подключение
-        mysqli_close($link);
+            if($result) {
+                echo "<div class='alert alert-success' role='alert'>Задача успешно создана</div>";
+            }
+        // Closed connection
+            mysqli_close($link);
     }
     ?>
 
