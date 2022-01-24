@@ -29,42 +29,29 @@
   $link->set_charset("utf8");
 	
 $query ="
-SELECT
- /*row[0] */
- tList.OUID  
- /*row[1] */
- ,tList.T_TITLE
- /* row[2]  */
- ,tList.T_BODY  
- /* row[3] */
- ,tList.T_CREATEDATE
- /* row[4] */
- ,tList.T_PLANDATE
- /* row[5] */
- ,tList.T_FACTDATE
- /* row[6] */
- ,report.A_NAME   
- /* row[7] */
- ,imp.A_NAME
- /* row[8] */
- ,users.A_NAME    
- /* row[9] */
- ,tStatus.A_NAME
-  /* row[10] */
- ,imp.OUID
- /* row[11] */
- ,tStatus.OUID 
- /* row[12] */
- ,(SELECT CURDATE())
- /* row[13] */
- ,users.OUID
-
-FROM TASK_LIST tList
-  LEFT JOIN IMPORTANT imp ON imp.OUID = tList.T_IMPORTANT
-  LEFT JOIN REPORT report ON report.OUID = tList.T_REPORT
-  LEFT JOIN STATUS_TASK tStatus ON tStatus.OUID = tList.T_STATUS_TASK
-  LEFT JOIN USERS users ON users.OUID = tList.T_MAKER
-WHERE tList.OUID = $id
+   select tl.OUID  
+        , tl.T_TITLE
+        , tl.T_BODY  
+        , tl.T_CREATEDATE
+        , tl.T_PLANDATE
+        , tl.T_FACTDATE
+        , r.A_NAME   
+        , i.A_NAME
+        , u.A_NAME    
+        , ts.A_NAME
+        , i.OUID
+        , ts.OUID 
+        , (select curdate())
+        , u.OUID
+     from TASK_LIST tl
+left join IMPORTANT i
+       on i.OUID = tl.T_IMPORTANT
+left join REPORT r
+       on r.OUID = tl.T_REPORT
+left join STATUS_TASK ts
+       on ts.OUID = tl.T_STATUS_TASK
+left join USERS u ON u.OUID = tl.T_MAKER
+    where tl.OUID = $id
 ";
 
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
