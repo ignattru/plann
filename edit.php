@@ -22,7 +22,7 @@
   $id = (int) $_GET[ "id" ];
   require_once 'connection.php';
  
-  // подключаемся к серверу
+  // Connect to server
   $link = mysqli_connect($host, $user, $password, $database) or die("Ошибка " . mysqli_error($link));
   $link->set_charset("utf8");
 	
