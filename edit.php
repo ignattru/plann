@@ -11,12 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
   </head>
 <body>
-  <style>
-  .page-header {
-     padding-bottom: 0px; 
-     margin: 0px 0 0px;
-   }
-  </style>
+  
 
  <?php
   $id = (int) $_GET[ "id" ];
