@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
   </head>
 <body>
-  
 
  <?php
   $id = (int) $_GET[ "id" ];
@@ -65,7 +64,7 @@ if(isset($_POST['dfact']) && isset($_POST['report']) && isset($_POST['statustask
     // Construct query 
     $sql_insert_report = "INSERT INTO REPORT VALUES(NULL, '$report')";   
     $query2 ="UPDATE TASK_LIST SET T_FACTDATE = '$dfact', T_REPORT = (SELECT MAX(OUID) FROM REPORT), T_STATUS_TASK = '$statustask', T_TITLE = '$title', T_BODY = '$body', T_IMPORTANT = '$important', T_MAKER = '$maker' WHERE TASK_LIST.OUID = $id ";
-     $resultinsert = mysqli_query($link, $sql_insert_report) or die("Ошибка " . mysqli_error($link)); 
+    $resultinsert = mysqli_query($link, $sql_insert_report) or die("Ошибка " . mysqli_error($link)); 
     
     $result2 = mysqli_query($link, $query2) or die("Статус задачи не выбран!"); 
     if($result2) {
@@ -76,7 +75,7 @@ if(isset($_POST['dfact']) && isset($_POST['report']) && isset($_POST['statustask
 }
 ?>
 
-  <div class="container" style="background-color:#f0ad4e";>
+  <div class="container" style="background-color:#7556f3";>
     <a href="index.php" class="btn btn-default navbar-btn" role="button">Закрыть</a>
     <b style="color:#fff;">&nbsp;&nbsp;Задача</b>
     <span class="label label-default"><?php echo $row[0]; ?></span>
@@ -84,10 +83,10 @@ if(isset($_POST['dfact']) && isset($_POST['report']) && isset($_POST['statustask
 <div class="container" style="background-color:#fbfbfb";>
 <div class="page-header">
         <h2>
-            <b><?php echo $row[1]; ?></b>
+          <b><?php echo $row[1]; ?></b>
         </h2>
         <p>
-            <span class="label label-warning"><?php echo $row[9]; ?></span>
+          <span class="label" style="background-color:#7556f3"><?php echo $row[9]; ?></span>
         </p>
 </div>
   <div class="row">
@@ -202,7 +201,7 @@ if(isset($_POST['dfact']) && isset($_POST['report']) && isset($_POST['statustask
 
 <div class="form-row">
   <div class="form-group col-md-6">
-    <button type="submit" class="btn btn-warning">Сохранить</button>
+    <button type="submit" class="btn btn-default">Сохранить</button>
   </div>
 </div>
 </form>
