@@ -145,13 +145,11 @@
                                                 <?php $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
                                                     if($result) {   
                                                         while ($row = mysqli_fetch_row($result)) {
-                                                            $cntA = $row[14];
-                                                            $cntB = $row[15];
-                                                            $cntC = $row[16];
-                                                            $cntD = $row[17];
+                                                            $cntA = $row[14]; $cntB = $row[15];
+                                                            $cntC = $row[16]; $cntD = $row[17];
                                                             if($row[18] === '1' & $row[19] === '5') {
                                                             echo "<tr>";
-                                                                echo "<td> <a href='edit.php?id=",$row[0],"'>", "<button type='button' class='btn btn-warning btn-edit'>", "<img src='img/edit.svg' width='18' height='18' class='d-inline-block align-top'>","</button></a></td>";
+                                                                echo "<td> <a style='text-decoration: none;' href='edit.php?id=",$row[0],"'>", "<button type='button' class='btn btn-warning btn-edit'>", "<img src='img/edit.svg' width='18' height='18' class='d-inline-block align-top'>","</button></a></td>";
                                                                 echo "<td>",$row[0],"</td>";
                                                                 echo "<td> <a href='task.php?id=",$row[0],"'>",$row[1],"</a></td>";
                                                                 echo "<td width='110'>",$row[3],"</td>";
