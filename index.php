@@ -149,7 +149,7 @@
                                                             $cntC = $row[16]; $cntD = $row[17];
                                                             if($row[18] === '1' & $row[19] === '5') {
                                                             echo "<tr>";
-                                                                echo "<td> <a style='text-decoration: none;' href='edit.php?id=",$row[0],"'>", "<button type='button' class='btn btn-warning btn-edit'>", "<img src='img/edit.svg' width='18' height='18' class='d-inline-block align-top'>","</button></a></td>";
+                                                                echo "<td> <a style='border-bottom: none;' href='edit.php?id=",$row[0],"'>", "<button type='button' class='btn btn-warning btn-edit'>", "<img src='img/edit.svg' width='18' height='18' class='d-inline-block align-top'>","</button></a></td>";
                                                                 echo "<td>",$row[0],"</td>";
                                                                 echo "<td> <a href='task.php?id=",$row[0],"'>",$row[1],"</a></td>";
                                                                 echo "<td width='110'>",$row[3],"</td>";
