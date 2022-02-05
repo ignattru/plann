@@ -101,7 +101,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">Планн</h5>
-                            <p class="card-text">Планн - простой и быстрый трекер задач. Просто обычный адаптивный абзац, текст и гифка, всякое разное вот тут.</p>
+                            <p class="card-text">Планн - простой и быстрый open source трекер задач. Просто обычный адаптивный абзац, текст и гифка, всякое разное вот тут.</p>
                             <p class="card-text"><small>Документация</small></p>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                                                     <th>Исполнитель</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="list">
                                                 <?php $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
                                                     if($result) {   
                                                         while ($row = mysqli_fetch_row($result)) {
@@ -335,6 +335,7 @@
                 }
               },
             });
+
         </script>
 
     <?php  #Закрываем подключение

@@ -116,7 +116,7 @@ body{
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #b3a1fb;
-  
+  color: #fff;
 }
 
 .table-hover tbody a {
@@ -130,9 +130,11 @@ body{
 
 .table-hover tbody tr:hover a {
   color: #fff;
-  
 }
 
+.table-hover tbody tr:hover a:hover {
+  color: #ecff24;
+}
 
 
 .table td, .table th {
@@ -178,7 +180,6 @@ body{
 .col-sm-3 {
     background-color: #f7f7f7;
 }
-
 
 
 /*** Типографика ***/
