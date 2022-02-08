@@ -72,14 +72,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Настройки</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="dev.php">Редактор должностей</a>
-                            <a class="dropdown-item" href="dev.php">Редактор пользователей</a>
+                             
+                            <a class="dropdown-item" href="dev.php">Редактор исполнителей</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="dev.php">Настройка системы</a>
+                            <a class="dropdown-item" href="dev.php">Инструкции</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="nav-link btn btn-sm btn-outline-warning" href="add.php">Добавить задачу</a>
+                        <a type="button" class="nav-link btn btn-sm btn-outline-warning" href="add.php">Создать задачу</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
