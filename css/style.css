@@ -115,7 +115,7 @@ body{
  
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #b3a1fb;
+  background-color: #cbbeff;
   color: #fff;
 }
 
@@ -147,6 +147,12 @@ body{
 
 .container-fluid {
   background-color: #f7f7f7;
+}
+
+.table .thead-light th {
+    color: #495057;
+    background-color: #cbbeff;
+    border-color: #ccbeff;
 }
 
 .badge {
