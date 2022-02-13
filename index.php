@@ -141,7 +141,7 @@
                                                     <th>Исполнитель</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="list">
+                                            <tbody>
                                                 <?php $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
                                                     if($result) {   
                                                         while ($row = mysqli_fetch_row($result)) {
@@ -168,9 +168,9 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">&nbsp;
                                 <div class="container-fluid">
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-md" id="mytable">
+                                        <table class="table table-hover table-md" id="myTable">
                                             <thead class="thead-light">
-                                                <tr>
+                                             <tr>
                                                     <th> </th>
                                                     <th>№</th>
                                                     <th>Задача</th>
@@ -184,8 +184,8 @@
                                                     if($result) {   
                                                         while ($row = mysqli_fetch_row($result)) {
                                                             if($row[18] === '2' & $row[19] === '5') {
-                                                                echo "<tr>";
-                                                                echo "<td> <a href='edit.php?id=",$row[0],"'>", "<button type='button' class='btn btn-warning btn-edit'>", "<img src='img/edit.svg' width='18' height='18' class='d-inline-block align-top'>","</button></a></td>";
+                                                            echo "<tr>";
+                                                                echo "<td> <a style='border-bottom: none;' href='edit.php?id=",$row[0],"'>", "<button type='button' class='btn btn-warning btn-edit'>", "<img src='img/edit.svg' width='18' height='18' class='d-inline-block align-top'>","</button></a></td>";
                                                                 echo "<td>",$row[0],"</td>";
                                                                 echo "<td> <a href='task.php?id=",$row[0],"'>",$row[1],"</a></td>";
                                                                 echo "<td width='110'>",$row[3],"</td>";
@@ -240,7 +240,7 @@
                             <div class="tab-pane fade" id="deyatel" role="tabpanel" aria-labelledby="deyatel-tab">&nbsp;
                                 <div class="container-fluid">
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-md" id="mytable">
+                                        <table class="table table-hover table-md" id="myTable">
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th> </th>
