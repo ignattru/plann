@@ -20,27 +20,25 @@
 	$link->set_charset("utf8");
 	
 $query ="
-  SELECT
-  tList.OUID AS idTask  
-  ,tList.T_TITLE AS title 
-  ,IFNULL(tList.T_BODY, 'Нет описания')
-  ,tList.T_CREATEDATE AS dCreate
-  ,tList.T_PLANDATE AS dPlan 
-  ,tList.T_FACTDATE AS dFact 
-  ,report.A_NAME AS report   
-  ,imp.A_NAME AS isImportant 
-  ,users.A_NAME AS users      
-  ,tStatus.A_NAME AS statusTask  
-  ,imp.OUID AS isimpid
-  ,tStatus.OUID AS statId 
-  ,(SELECT CURDATE()) AS timestmp
-
-  FROM TASK_LIST tList
-    LEFT JOIN IMPORTANT imp ON imp.OUID = tList.T_IMPORTANT
-    LEFT JOIN REPORT report ON report.OUID = tList.T_REPORT
-    LEFT JOIN STATUS_TASK tStatus ON tStatus.OUID = tList.T_STATUS_TASK
-    LEFT JOIN USERS users ON users.OUID = tList.T_MAKER
-  WHERE tList.OUID = $id
+    select tl.OUID AS idTask
+         , tl.T_TITLE AS title 
+         , IFNULL(tl.T_BODY, 'Нет описания')
+         , tl.T_CREATEDATE AS dCreate
+         , tl.T_PLANDATE AS dPlan 
+         , tl.T_FACTDATE AS dFact 
+         , r.A_NAME AS report   
+         , i.A_NAME AS isImportant 
+         , u.A_NAME AS users      
+         , ts.A_NAME AS statusTask  
+         , i.OUID AS isimpid
+         , ts.OUID AS statId 
+         , (select curdate()) AS timestmp
+      from TASK_LIST tl
+ left join IMPORTANT i ON i.OUID = tl.T_IMPORTANT
+ left join REPORT r ON r.OUID = tl.T_REPORT
+ left join STATUS_TASK ts ON ts.OUID = tl.T_STATUS_TASK
+ left join USERS u ON u.OUID = tl.T_MAKER
+     where tl.OUID = $id
 ";
 
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
